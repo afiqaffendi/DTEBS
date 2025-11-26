@@ -116,4 +116,27 @@ input:focus{
 
 .link{
   font-size:13px;
-  colo
+  color:var(--accent);
+  text-decoration:none;
+}
+
+.divider{
+  height:1px;
+  background:rgba(0,0,0,0.06);
+  margin:14px 0;
+}
+
+.meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.helper{
+  font-size:13px;
+  text-align:center;
+  margin-top:10px;
+  color:var(--muted);
+}
