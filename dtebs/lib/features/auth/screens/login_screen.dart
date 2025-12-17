@@ -52,23 +52,30 @@ class _LoginScreenState extends State<LoginScreen> {
           password: _passwordController.text,
         );
 
-        if (mounted && user != null) {
+        // Check mounted before using context
+        if (!mounted) return;
+
+        if (user != null) {
           print('DEBUG: Login successful, user role: ${user.role}');
 
           if (user.role == 'Restaurant Owner') {
             print('DEBUG: Navigating to Restaurant Details Screen');
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => const RestaurantDetailsScreen(),
-              ),
-            );
+            if (mounted) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const RestaurantDetailsScreen(),
+                ),
+              );
+            }
           } else {
             print('DEBUG: Navigating to Customer Home Screen');
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => const CustomerHomeScreen(),
-              ),
-            );
+            if (mounted) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const CustomerHomeScreen(),
+                ),
+              );
+            }
           }
         } else {
           print('DEBUG: Login returned null user');
