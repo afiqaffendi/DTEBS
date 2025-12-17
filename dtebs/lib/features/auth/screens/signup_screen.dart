@@ -15,6 +15,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
   String _selectedRole = 'Customer'; // Default role
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -27,26 +28,61 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> _handleRegister() async {
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+
       try {
+        print('DEBUG: Register button pressed');
+        print('DEBUG: Name: ${_nameController.text}, Role: $_selectedRole');
+
+        String generatedEmail =
+            '${_nameController.text.trim().replaceAll(' ', '').toLowerCase()}@example.com';
+        print('DEBUG: Generated email: $generatedEmail');
+
         await _authService.signUp(
-          email:
-              '${_nameController.text.replaceAll(' ', '').toLowerCase()}@example.com', // Mock email generation for simplicity as per UI
+          email: generatedEmail,
           password: _passwordController.text,
-          name: _nameController.text,
+          name: _nameController.text.trim(),
           role: _selectedRole,
         );
 
+        print('DEBUG: Registration successful');
+
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Registration Successful!')),
+            const SnackBar(
+              content: Text(
+                'Registration Successful! Please login with your credentials.',
+              ),
+              backgroundColor: Colors.green,
+              duration: Duration(seconds: 4),
+            ),
           );
-          Navigator.of(context).pop();
+
+          // Wait a moment for the user to see the success message
+          await Future.delayed(const Duration(seconds: 1));
+
+          if (mounted) {
+            Navigator.of(context).pop();
+          }
         }
       } catch (e) {
+        print('DEBUG: Registration error caught: $e');
         if (mounted) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text('Error: $e')));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(e.toString().replaceAll('Exception: ', '')),
+              backgroundColor: Colors.red,
+              duration: const Duration(seconds: 5),
+            ),
+          );
+        }
+      } finally {
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
         }
       }
     }
@@ -166,8 +202,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 32),
                     ElevatedButton(
-                      onPressed: _handleRegister,
-                      child: const Text('REGISTER'),
+                      onPressed: _isLoading ? null : _handleRegister,
+                      child: _isLoading
+                          ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                            )
+                          : const Text('REGISTER'),
                     ),
                     const SizedBox(height: 20),
                     TextButton(

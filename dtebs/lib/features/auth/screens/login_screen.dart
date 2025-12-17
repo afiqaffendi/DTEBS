@@ -18,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -30,18 +31,21 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _handleLogin() async {
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+
       try {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Processing Login...')));
+        print('DEBUG: Login button pressed');
 
         // Assume user enters email for now, or use same logic if just name
-        String emailInput = _emailController.text;
+        String emailInput = _emailController.text.trim();
         if (!emailInput.contains('@')) {
           // If they entered just a name, try to reconstruct mock email
           emailInput =
               '${emailInput.replaceAll(' ', '').toLowerCase()}@example.com';
         }
+        print('DEBUG: Using email: $emailInput');
 
         UserModel? user = await _authService.signIn(
           email: emailInput,
@@ -49,27 +53,51 @@ class _LoginScreenState extends State<LoginScreen> {
         );
 
         if (mounted && user != null) {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          print('DEBUG: Login successful, user role: ${user.role}');
 
           if (user.role == 'Restaurant Owner') {
+            print('DEBUG: Navigating to Restaurant Details Screen');
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => const RestaurantDetailsScreen(),
               ),
             );
           } else {
+            print('DEBUG: Navigating to Customer Home Screen');
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => const CustomerHomeScreen(),
               ),
             );
           }
+        } else {
+          print('DEBUG: Login returned null user');
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Login failed. Please try again.'),
+                backgroundColor: Colors.red,
+                duration: Duration(seconds: 4),
+              ),
+            );
+          }
         }
       } catch (e) {
+        print('DEBUG: Login error caught: $e');
         if (mounted) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text('Login Error: $e')));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(e.toString().replaceAll('Exception: ', '')),
+              backgroundColor: Colors.red,
+              duration: const Duration(seconds: 5),
+            ),
+          );
+        }
+      } finally {
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
         }
       }
     }
@@ -169,8 +197,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 32),
                     ElevatedButton(
-                      onPressed: _handleLogin,
-                      child: const Text('LOGIN'),
+                      onPressed: _isLoading ? null : _handleLogin,
+                      child: _isLoading
+                          ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                            )
+                          : const Text('LOGIN'),
                     ),
                     const SizedBox(height: 20),
                     TextButton(
