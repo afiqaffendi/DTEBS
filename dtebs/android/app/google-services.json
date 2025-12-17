@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "430974164290",
+    "project_id": "dtebs-cf59a",
+    "storage_bucket": "dtebs-cf59a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430974164290:android:d2624db22b57a70d5dbcdb",
+        "android_client_info": {
+          "package_name": "com.company.dtebs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRTuSJ_2ORRBEN1SHR0UF_KHDlLy2cdTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430974164290:android:5929bddb1ca1df5d5dbcdb",
+        "android_client_info": {
+          "package_name": "com.example.dtebs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRTuSJ_2ORRBEN1SHR0UF_KHDlLy2cdTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
