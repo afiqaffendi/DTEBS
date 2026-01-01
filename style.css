@@ -1,0 +1,142 @@
+:root{
+  --bg1: #f6f8ff;
+  --card: #ffffff;
+  --accent: #4f46e5;
+  --accent-2: #6366f1;
+  --muted: #6b7280;
+  --success: #10b981;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+*{ box-sizing: border-box; }
+html, body{ height:100%; }
+body{
+  margin:0;
+  background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(79,70,229,0.04)), var(--bg1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+  color:#111827;
+}
+
+.card{
+  width:100%;
+  max-width:420px;
+  background:var(--card);
+  border-radius:12px;
+  padding:28px;
+  border:1px solid rgba(0,0,0,0.05);
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.brand{
+  display:flex;
+  gap:12px;
+  margin-bottom:18px;
+  align-items:center;
+}
+.logo{
+  height:44px;
+  width:44px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  color:white;
+  font-weight:700;
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+
+.lead{
+  margin:6px 0 18px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+form{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+label{
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+
+.field{ display:flex; flex-direction:column; }
+
+input[type="email"],
+input[type="password"]{
+  height:44px;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid rgba(0,0,0,0.06);
+  font-size:14px;
+  outline:none;
+}
+input:focus{
+  border-color:var(--accent-2);
+  box-shadow:0 4px 12px rgba(99,102,241,0.15);
+}
+
+.pw-flex{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.toggle-btn{
+  height:40px;
+  padding:0 12px;
+  border-radius:8px;
+  border:1px solid rgba(0,0,0,0.1);
+  background:white;
+  cursor:pointer;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.checkbox{ display:flex; gap:8px; font-size:14px; }
+
+.btn{
+  height:44px;
+  border:0;
+  border-radius:10px;
+  font-weight:600;
+  font-size:15px;
+  cursor:pointer;
+  background:linear-gradient(90deg, var(--accent), var(--accent-2));
+  color:white;
+}
+
+.link{
+  font-size:13px;
+  color:var(--accent);
+  text-decoration:none;
+}
+
+.divider{
+  height:1px;
+  background:rgba(0,0,0,0.06);
+  margin:14px 0;
+}
+
+.meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.helper{
+  font-size:13px;
+  text-align:center;
+  margin-top:10px;
+  color:var(--muted);
+}
