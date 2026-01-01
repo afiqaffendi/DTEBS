@@ -2,37 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  // Colors - Warm & Appetite Inducing for Restaurant Management
-  static const Color primaryColor = Color(0xFFFF6B6B); // Vibrant Coral Red
-  static const Color primaryVariant = Color(0xFFFF8E53); // Warm Orange
-  static const Color accentColor = Color(0xFFFFAB91); // Light Peach
+  // Colors - Modern Teal/Green Theme for Restaurant Management
+  static const Color primaryColor = Color(0xFF5BA092); // Teal/Green
+  static const Color primaryVariant = Color(0xFF4A8F7F); // Darker Teal
+  static const Color accentColor = Color(0xFF7BC5B8); // Light Teal
 
-  static const Color backgroundColor = Color(
-    0xFFFFF8F0,
-  ); // Soft Cream - warm and elegant
+  static const Color backgroundColor = Color(0xFFF5F5F7); // Light Gray
   static const Color surfaceColor = Color(0xFFFFFFFF); // Pure White Surface
   static const Color secondaryColor = backgroundColor; // Alias for consistency
 
-  static const Color errorColor = Color(0xFFD32F2F);
-  static const Color successColor = Color(0xFF4CAF50);
+  static const Color errorColor = Color(0xFFEF5350);
+  static const Color successColor = Color(0xFF66BB6A);
 
   static const Color onPrimary = Colors.white;
   static const Color onSecondary = Color(0xFF2D3436); // Dark Charcoal Text
   static const Color onSurface = Color(0xFF2D3436);
   static const Color onBackground = Color(0xFF2D3436);
 
-  // Gradient Definitions
-  static const LinearGradient primaryGradient = LinearGradient(
-    colors: [primaryColor, primaryVariant],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
-
-  static const LinearGradient backgroundGradient = LinearGradient(
-    colors: [backgroundColor, Color(0xFFFFEFE0)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-  );
+  // Text colors
+  static const Color textPrimary = Color(0xFF2D3436);
+  static const Color textSecondary = Color(0xFF636E72);
+  static const Color textHint = Color(0xFFB2BEC3);
 
   // Animation Durations
   static const Duration shortAnimation = Duration(milliseconds: 200);
@@ -130,17 +120,17 @@ class AppTheme {
         style: ElevatedButton.styleFrom(
           backgroundColor: primaryColor,
           foregroundColor: onPrimary,
-          elevation: 3,
-          shadowColor: primaryColor.withOpacity(0.4),
+          elevation: 0,
+          shadowColor: Colors.black.withOpacity(0.1),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(20),
           ),
           textStyle: GoogleFonts.lato(
             fontSize: 16,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 0.8,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.5,
           ),
-          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 32),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
         ),
       ),
 
@@ -153,9 +143,9 @@ class AppTheme {
       ),
 
       cardTheme: CardThemeData(
-        elevation: 2,
-        shadowColor: Colors.black.withOpacity(0.1),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        elevation: 0,
+        shadowColor: Colors.black.withOpacity(0.08),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         color: surfaceColor,
       ),
 

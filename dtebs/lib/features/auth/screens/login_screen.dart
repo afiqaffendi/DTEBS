@@ -128,103 +128,101 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(gradient: AppTheme.backgroundGradient),
-        child: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // Restaurant Icon with Shadow
-                    Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppTheme.primaryColor.withOpacity(0.2),
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.restaurant_menu,
-                        size: 60,
-                        color: AppTheme.primaryColor,
-                      ),
+      backgroundColor: AppTheme.backgroundColor,
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Restaurant Icon with Shadow
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppTheme.primaryColor.withOpacity(0.2),
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 24),
-                    Text(
-                      'DTEBS',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        color: AppTheme.primaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: const Icon(
+                      Icons.restaurant_menu,
+                      size: 60,
+                      color: AppTheme.primaryColor,
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Reserve your exclusive table',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppTheme.onBackground.withOpacity(0.7),
-                        fontSize: 16,
-                      ),
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
+                    'DTEBS',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                      color: AppTheme.primaryColor,
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 60),
-                    AuthTextField(
-                      label: 'Email or ID',
-                      prefixIcon: Icons.person_outline,
-                      controller: _emailController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your email or ID';
-                        }
-                        return null;
-                      },
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Reserve your exclusive table',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppTheme.onBackground.withOpacity(0.7),
+                      fontSize: 16,
                     ),
-                    AuthTextField(
-                      label: 'Password',
-                      prefixIcon: Icons.lock_outline,
-                      isObscure: true,
-                      controller: _passwordController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your password';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 32),
-                    ElevatedButton(
-                      onPressed: _isLoading ? null : _handleLogin,
-                      child: _isLoading
-                          ? const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  Colors.white,
-                                ),
+                  ),
+                  const SizedBox(height: 60),
+                  AuthTextField(
+                    label: 'Email or ID',
+                    prefixIcon: Icons.person_outline,
+                    controller: _emailController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email or ID';
+                      }
+                      return null;
+                    },
+                  ),
+                  AuthTextField(
+                    label: 'Password',
+                    prefixIcon: Icons.lock_outline,
+                    isObscure: true,
+                    controller: _passwordController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 32),
+                  ElevatedButton(
+                    onPressed: _isLoading ? null : _handleLogin,
+                    child: _isLoading
+                        ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.white,
                               ),
-                            )
-                          : const Text('LOGIN'),
-                    ),
-                    const SizedBox(height: 20),
-                    TextButton(
-                      onPressed: _navigateToSignUp,
-                      child: const Text('Don\'t have an account? Sign Up'),
-                    ),
-                  ],
-                ),
+                            ),
+                          )
+                        : const Text('LOGIN'),
+                  ),
+                  const SizedBox(height: 20),
+                  TextButton(
+                    onPressed: _navigateToSignUp,
+                    child: const Text('Don\'t have an account? Sign Up'),
+                  ),
+                ],
               ),
             ),
           ),

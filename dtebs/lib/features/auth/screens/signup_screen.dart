@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:dtebs/core/theme/app_theme.dart';
 import 'package:dtebs/features/auth/widgets/auth_text_field.dart';
 import 'package:dtebs/features/auth/services/auth_service.dart';
@@ -95,9 +95,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(gradient: AppTheme.backgroundGradient),
-        child: SafeArea(
+      backgroundColor: AppTheme.backgroundColor,
+      body: SafeArea(
           child: Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24.0),
@@ -227,7 +226,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
         ),
-      ),
     );
   }
 }

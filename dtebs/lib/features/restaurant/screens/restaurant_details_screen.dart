@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/restaurant_model.dart';
 import '../services/restaurant_service.dart';
@@ -174,9 +174,8 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
           ),
         ],
       ),
-      body: Container(
-        decoration: const BoxDecoration(gradient: AppTheme.backgroundGradient),
-        child: SingleChildScrollView(
+      backgroundColor: AppTheme.backgroundColor,
+      body: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
           child: Form(
             key: _formKey,
@@ -187,7 +186,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    gradient: AppTheme.primaryGradient,
+                    color: AppTheme.primaryColor,
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
@@ -478,7 +477,6 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
             ),
           ),
         ),
-      ),
     );
   }
 }
